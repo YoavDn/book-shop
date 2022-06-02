@@ -7,6 +7,7 @@
 
 html {
   font-family: 'Lato', sans-serif;
+  color: rgb(205, 196, 196);
 }
 
 h2 {
@@ -16,20 +17,25 @@ h2 {
 table {
   margin: auto;
   border-collapse: collapse;
+  margin-bottom: 4rem;
 }
 
 td {
   font-size: 1rem;
-  border: black solid 1px;
+  border: rgb(187, 183, 183) solid 0.03em;
   width: 150px;
   height: 50px;
   text-align: center;
   padding: 1rem;
 }
 thead {
-  text-decoration: underline;
   font-weight: 700;
-  background: linear-gradient(to bottom, #a17c98, rgba(255, 217, 0, 0.1));
+  color: black;
+  background: linear-gradient(to bottom, rgb(170, 165, 165), rgb(58, 55, 60));
+}
+body {
+  background: linear-gradient(to top left, rgb(21, 20, 21), rgb(58, 55, 60))
+    no-repeat;
 }
 
 .new-book {
@@ -37,12 +43,11 @@ thead {
   display: block;
   margin: auto;
   margin-bottom: 1rem;
-  padding: 0.3rem;
 }
 
 .modal {
   position: absolute;
-  background-color: white;
+  background-color: black;
   top: 40%;
   left: 50%;
   width: 60%;
@@ -104,9 +109,6 @@ thead {
 }
 
 .rate-btn {
-  width: 30px;
-  height: 30px;
-  font-size: 1rem;
 }
 
 .rate-placeholder {
@@ -117,6 +119,33 @@ thead {
   display: flex;
   width: 90%;
   margin: auto;
-  justify-content: space-evenly;
+  justify-content: center;
+
   padding: 1.4rem;
+  align-items: center;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.select-sort {
+  flex-basis: 50%;
+}
+
+button {
+  cursor: pointer;
+  border: rgb(187, 184, 184) solid 2px;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  color: rgb(207, 207, 207);
+  background: none;
+  /* background: linear-gradient(to bottom left, #a17c98, rgba(255, 217, 0, 0.1)); */
+}
+
+button:hover {
+  color: rgba(186, 180, 180, 0.618);
 }

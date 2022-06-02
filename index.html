@@ -21,15 +21,12 @@
         </select>
 
       </form>
-
-      <form >
+      <form  class="filter-form">
         <input name="search" type="text" oninput="onFilterBooks({ title: this.value})" placeholder="Enter Book name..">
         <label for="max-price">Price</label>
         <input name="max-price" min="0" max="20" type="range" onchange="onFilterBooks({maxPrice: this.value})">
         <label for="min-rating">Rating</label>
         <input name="min-rating" min="0" max="10" type="range" onchange="onFilterBooks({minRating: this.value})">
-
-
       </form>
     </div>
  
