@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  padding: 1rem;
+  text-align: center;
+}
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+td {
+  font-size: 1rem;
+  border: black solid 1px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  padding: 1rem;
+}
+thead {
+  text-decoration: underline;
+  font-weight: 700;
+  background: linear-gradient(to bottom, #a17c98, rgba(255, 217, 0, 0.1));
+}
+
+.new-book {
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+}
+
+.modal {
+  position: absolute;
+  background-color: white;
+  top: 40%;
+  left: 50%;
+  width: 60%;
+
+  transform: translate(-50%, -50%);
+  padding: 0 1rem;
+  border-radius: 1rem;
+  z-index: 101;
+}
+
+.book-info {
+  display: flex;
+  text-align: center;
+  width: 80%;
+  justify-content: space-between;
+  margin: auto;
+  padding: 1rem;
+}
+
+.close-modal {
+  cursor: pointer;
+  position: absolute;
+  right: 2%;
+  font-size: 3rem;
+  border: none;
+  background: none;
+  transform: translateY(-30%);
+}
+
+.overlay {
+  position: fixed;
+  padding-top: 3rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+}
+
+.hidden {
+  display: none;
+}
+
+.book-rate {
+  display: flex;
+  margin: auto;
+  padding: 1rem;
+  margin-top: 1rem;
+  justify-content: space-evenly;
+  width: 70%;
+
+  align-items: center;
+}
+.update-rate {
+  font-size: 1.2rem;
+}
+
+.rate-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+}
+
+.rate-placeholder {
+  flex-basis: 50%;
+}
+
+.forms {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  justify-content: space-evenly;
+  padding: 1.4rem;
+}

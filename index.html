@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css">
+    <title>Book Shop</title>
+  </head>
+  <body onload="onInit()">
+    <h2>Book Shop</h2>
+    <button class="new-book" onclick="onAddBook()">Add new Book</button>
+    <div class="forms">
+   <form class="select-sort" action="">
+        <label for="sort-books">Sort by:</label>
+        <select name="sort-books" onchange="onSortBooks()">
+          <option value="price">Price</option>
+          <option value="name">Name</option>
+          <option value="rating">Rating</option>
+
+        </select>
+
+      </form>
+
+      <form >
+        <input name="search" type="text" oninput="onFilterBooks({ title: this.value})" placeholder="Enter Book name..">
+        <label for="max-price">Price</label>
+        <input name="max-price" min="0" max="20" type="range" onchange="onFilterBooks({maxPrice: this.value})">
+        <label for="min-rating">Rating</label>
+        <input name="min-rating" min="0" max="10" type="range" onchange="onFilterBooks({minRating: this.value})">
+
+
+      </form>
+    </div>
+ 
+
+
+    <section class="books-container">
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Rating</td>
+            <td>Price</td>
+
+            <td colspan="3">Actions</td>
+          </tr>
+          <tbody>
+          
+
+          </tbody>
+        </thead>
+
+      </table>
+      
+
+    </section>
+    <div class="modal hidden">
+      <button class="close-modal" onclick="onCloseModal()">&Cross;</button>
+      <h2 class="book-title">Harry potter</h2>
+      <div class="book-info">
+
+        <h3 >Rating: <span class="book-rating">2</span></h3>
+        <h3 >Price: <span class="book-price">12.30</span></h3>
+        <h3 >ID: <span class="book-id">2</span></h3>
+      </div>
+      <p class="book-desc"></p>
+      
+      <div class="book-rate">
+        <h3 class="rate-placeholder">Rate: </h3>
+        <button class="rate-btn plus" onclick="onRateBook(this)">+</button>
+        <h1 class="update-rate">0</h1>
+        <button class="rate-btn minus" onclick="onRateBook(this)">-</button>
+      </div>
+    </div>
+
+    <div class="user-msg"></div>
+    <div class="overlay hidden"></div>
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/book.service.js"></script>
+    <script src="js/book.controller.js"></script>
+  </body>
+</html>
