@@ -18,9 +18,12 @@ var gFilterBy = { title: '', maxPrice: 100, minRating: 0 }
 
 _createBooks()
 
+function getCurPage() {
+  return gPageIdx
+}
+
 function selectPage(pageIdx) {
   const queryPage = pageIdx
-
   const booksOnPage = getBooksOnPage(queryPage)
 
   if (booksOnPage > 0) gPageIdx = queryPage

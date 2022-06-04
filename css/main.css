@@ -137,13 +137,14 @@ body {
 
 button {
   cursor: pointer;
-  border: rgb(187, 184, 184) solid 2px;
+  width: 5rem;
+  border: rgb(187, 184, 184) solid 1px;
   padding: 1rem;
   border-radius: 0.4rem;
   font-weight: 600;
   color: rgb(207, 207, 207);
   background: none;
-  transition: all 0.3s;
+  transition: all 0.2s;
   /* background: linear-gradient(to bottom left, #a17c98, rgba(255, 217, 0, 0.1)); */
 }
 
@@ -162,6 +163,6 @@ button:hover {
   margin-left: 0.3rem;
 }
 
-.active-page-btn {
-  background-color: rgba(167, 167, 167, 0.656);
+.active {
+  background-color: rgba(167, 167, 167, 0.256);
 }

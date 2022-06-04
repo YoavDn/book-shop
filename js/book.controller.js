@@ -102,10 +102,12 @@ function onSortBooks() {
 
 function onFilterBooks(filterBy) {
   filterBy = setFilterBooks(filterBy)
+  const currPage = getCurPage()
+  console.log(currPage)
 
   renderBooks()
 
-  const queryStringParams = `?maxPrice=${filterBy.maxPrice}&minRating=${filterBy.minRating}`
+  const queryStringParams = `?maxPrice=${filterBy.maxPrice}&minRating=${filterBy.minRating}&title=${filterBy.title}`
   const newUrl =
     window.location.protocol +
     '//' +
@@ -122,7 +124,7 @@ function renderFilterByQueryStringParams() {
   const filterBy = {
     maxPrice: queryStringParams.get('maxPrice') || '',
     minRating: +queryStringParams.get('minRating') || 0,
-    title: +queryStringParams.get('title') || '',
+    title: queryStringParams.get('title') || '',
   }
 
   if (!filterBy.maxPrice && !filterBy.minRating) return
@@ -145,6 +147,7 @@ function onPrevPage() {
 function renderPagesNav() {
   let booksLength = getBooks(true).length
   let pagesNum = 0
+  const currPage = getCurPage()
 
   const elPagesUi = document.querySelector('.query-pages')
   elPagesUi.innerHTML = ''
@@ -155,7 +158,9 @@ function renderPagesNav() {
   }
 
   for (var i = 0; i < pagesNum; i++) {
-    elPagesUi.innerHTML += `<button class="page-btn" onclick="onSelectPage(${i})">${
+    var className = 'page-btn'
+    if (i === currPage) className += ' active'
+    elPagesUi.innerHTML += `<button class="${className}" onclick="onSelectPage(${i})">${
       i + 1
     }</button>`
   }
@@ -164,5 +169,6 @@ function renderPagesNav() {
 function onSelectPage(pageIdx) {
   console.log('wnat to go here to page', pageIdx)
   selectPage(pageIdx)
+
   renderBooks()
 }
