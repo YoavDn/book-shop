@@ -15,7 +15,7 @@ function renderBooks() {
             <td>${book.id}</td>
             <td>${book.title}</td>
             <td>&bigstar;${book.rating}</td>
-            <td>${book.price}</td>
+            <td>$${book.price}</td>
             <td><button class="read-btn"onclick=onOpenModal("${book.id}")>Read</button></td>
             <td><button class="update-btn" onclick=onUpdateBook("${book.id}")>Update</button></td>
             <td><button class="delete-btn" onclick=onDeleteBook("${book.id}")>Delete</button></td>
@@ -104,7 +104,6 @@ function onFilterBooks(filterBy) {
   filterBy = setFilterBooks(filterBy)
   const currPage = getCurPage()
   console.log(currPage)
-
   renderBooks()
 
   const queryStringParams = `?maxPrice=${filterBy.maxPrice}&minRating=${filterBy.minRating}&title=${filterBy.title}`
@@ -135,12 +134,15 @@ function renderFilterByQueryStringParams() {
 }
 
 function onNextPage() {
-  selectPage(1)
+  const nextPage = getCurPage() + 1
+  selectPage(nextPage)
   renderBooks()
 }
 
 function onPrevPage() {
-  selectPage(-1)
+  const prevPage = getCurPage() - 1
+
+  selectPage(prevPage)
   renderBooks()
 }
 
@@ -148,6 +150,10 @@ function renderPagesNav() {
   let booksLength = getBooks(true).length
   let pagesNum = 0
   const currPage = getCurPage()
+
+  if (!booksLength) {
+    renderMsg()
+  }
 
   const elPagesUi = document.querySelector('.query-pages')
   elPagesUi.innerHTML = ''
@@ -171,4 +177,20 @@ function onSelectPage(pageIdx) {
   selectPage(pageIdx)
 
   renderBooks()
+}
+
+function renderMsg() {
+  const elTbody = document.querySelector('tbody')
+
+  elTbody.innerHTML = `<tr> <td class="eror-msg" colspan="5">No books found...</td> </tr>`
+}
+
+function updateRatingValue(val) {
+  console.log(val)
+  document.getElementById('rating-value').innerText = val
+}
+
+function updatePriceValue(val) {
+  console.log(val)
+  document.getElementById('price-value').innerText = val
 }

@@ -23,10 +23,11 @@ function getCurPage() {
 }
 
 function selectPage(pageIdx) {
-  const queryPage = pageIdx
-  const booksOnPage = getBooksOnPage(queryPage)
+  const booksOnPage = getBooksOnPage(pageIdx)
+  console.log(pageIdx)
+  console.log(booksOnPage)
 
-  if (booksOnPage > 0) gPageIdx = queryPage
+  if (booksOnPage > 0) gPageIdx = pageIdx
 }
 
 function _createBook(title) {
@@ -53,7 +54,7 @@ function getBooks(isAll) {
   var books = gBooks.filter(book => {
     return (
       book.title.includes(gFilterBy.title) &&
-      +book.price >= +gFilterBy.maxPrice &&
+      +book.price <= +gFilterBy.maxPrice &&
       +book.rating >= +gFilterBy.minRating
     )
   })

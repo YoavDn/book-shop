@@ -10,6 +10,12 @@ html {
   color: rgb(205, 196, 196);
 }
 
+body {
+  height: 100vh;
+  background: linear-gradient(to top left, rgb(21, 20, 21), rgb(58, 55, 60))
+    no-repeat;
+}
+
 h2 {
   padding: 1rem;
   text-align: center;
@@ -17,7 +23,7 @@ h2 {
 table {
   margin: auto;
   border-collapse: collapse;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 td {
@@ -32,10 +38,6 @@ thead {
   font-weight: 700;
   color: black;
   background: linear-gradient(to bottom, rgb(170, 165, 165), rgb(58, 55, 60));
-}
-body {
-  background: linear-gradient(to top left, rgb(21, 20, 21), rgb(58, 55, 60))
-    no-repeat;
 }
 
 .new-book {
@@ -108,31 +110,29 @@ body {
   font-size: 1.2rem;
 }
 
-.rate-btn {
-}
-
 .rate-placeholder {
   flex-basis: 50%;
 }
 
 .forms {
   display: flex;
-  width: 90%;
+  width: 70%;
   margin: auto;
-  justify-content: center;
+  justify-content: space-around;
 
   padding: 1.4rem;
   align-items: center;
+}
+
+.select-sort {
+  flex-basis: 30%;
 }
 
 .filter-form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.select-sort {
-  flex-basis: 50%;
+  height: 100px;
 }
 
 button {
@@ -154,6 +154,9 @@ button:hover {
 }
 
 .paging {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
   margin-bottom: 3rem;
   display: flex;
   width: 100%;
@@ -165,4 +168,19 @@ button:hover {
 
 .active {
   background-color: rgba(167, 167, 167, 0.256);
+}
+
+.add-book {
+  flex-basis: 40%;
+}
+
+.eror-msg {
+  border: none;
+  font-size: 1.5rem;
+}
+
+.range-container {
+  display: flex;
+  width: 110%;
+  justify-content: space-around;
 }

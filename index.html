@@ -8,8 +8,8 @@
     <title>Book Shop</title>
   </head>
   <body onload="onInit()">
-    <h2>Book Shop</h2>
-    <button class="new-book" onclick="onAddBook()">Add new Book</button>
+    
+    
     <div class="forms">
    <form class="select-sort" action="">
         <label for="sort-books">Sort by:</label>
@@ -21,13 +21,31 @@
         </select>
 
       </form>
-      <form  class="filter-form">
+      <div class="add-book">
+
+    <h2>Book Shop</h2>
+    <button class="new-book" onclick="onAddBook()">Add new Book</button>
+    </div>
+    <div class="filter-container">
+
+      <label for="filter-form">Filter by:</label>
+    <form  name="filter-form" class="filter-form">
         <input name="search" type="text" oninput="onFilterBooks({ title: this.value})" placeholder="Enter Book name..">
-        <label for="max-price">Price</label>
-        <input name="max-price" min="0" max="20" type="range" onchange="onFilterBooks({maxPrice: this.value})">
-        <label for="min-rating">Rating</label>
-        <input name="min-rating" min="0" max="10" type="range" onchange="onFilterBooks({minRating: this.value})">
+        <div class="range-container">
+          <label for="max-price">Max Price:</label>
+        <input name="max-price" min="0" max="20" step="0.1" type="range" onchange="onFilterBooks({maxPrice: this.value});updatePriceValue(this.value)">
+          <p id="price-value">0</p>
+        </div>
+       <div class="range-container">
+          <label for="min-rating">Min Rating:</label>
+        <input name="min-rating" min="0" max="10"  type="range" onchange="onFilterBooks({minRating: this.value});updateRatingValue(this.value)">
+        <p id="rating-value">0</p> 
+       </div>
+
       </form>
+    </div>
+    
+    
     </div>
  
 
@@ -39,7 +57,7 @@
             <td>ID</td>
             <td>Title</td>
             <td>Rating</td>
-            <td>Price</td>
+            <td >Price</td>
 
             <td colspan="3">Actions</td>
           </tr>
