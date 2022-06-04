@@ -194,3 +194,9 @@ function updatePriceValue(val) {
   console.log(val)
   document.getElementById('price-value').innerText = val
 }
+
+const elDocument = document.querySelector('body')
+
+elDocument.addEventListener('click', e => {
+  if (e.target.classList.contains('overlay')) onCloseModal()
+})

@@ -78,6 +78,9 @@ thead {
   background: none;
   transform: translateY(-30%);
 }
+.close-modal:hover {
+  border: none;
+}
 
 .overlay {
   position: fixed;
@@ -89,7 +92,6 @@ thead {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   z-index: 100;
-  transition: all 0.5s;
 }
 
 .hidden {
