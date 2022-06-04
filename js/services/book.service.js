@@ -1,8 +1,10 @@
 'use strict'
 
 const STORAGE_KEY = 'booksDB'
+const PAGE_SIZE = 5
 
-var gId = 0
+var gId = 1
+var gPageIdx = 0
 
 const gBooksTitle = [
   'Mobby Dick',
@@ -15,6 +17,14 @@ var gBooks
 var gFilterBy = { title: '', maxPrice: 100, minRating: 0 }
 
 _createBooks()
+
+function selectPage(pageIdx) {
+  const queryPage = pageIdx
+
+  const booksOnPage = getBooksOnPage(queryPage)
+
+  if (booksOnPage > 0) gPageIdx = queryPage
+}
 
 function _createBook(title) {
   return {
@@ -36,7 +46,7 @@ function _createBooks() {
   _saveBooksToStorage()
 }
 
-function getBooks() {
+function getBooks(isAll) {
   var books = gBooks.filter(book => {
     return (
       book.title.includes(gFilterBy.title) &&
@@ -44,7 +54,11 @@ function getBooks() {
       +book.rating >= +gFilterBy.minRating
     )
   })
-  console.log(books)
+  if (!isAll) {
+    const startIdx = gPageIdx * PAGE_SIZE
+    books = books.slice(startIdx, startIdx + PAGE_SIZE)
+  }
+
   return books
 }
 
@@ -105,4 +119,8 @@ function setFilterBooks(filterBy = {}) {
   // var books = gBooks.filter(book => book.title === value)
 
   return gFilterBy
+}
+
+function getBooksOnPage(pageIdx) {
+  return gBooks.slice(pageIdx * PAGE_SIZE, pageIdx * PAGE_SIZE + 5).length
 }

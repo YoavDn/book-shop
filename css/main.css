@@ -143,9 +143,25 @@ button {
   font-weight: 600;
   color: rgb(207, 207, 207);
   background: none;
+  transition: all 0.3s;
   /* background: linear-gradient(to bottom left, #a17c98, rgba(255, 217, 0, 0.1)); */
 }
 
 button:hover {
   color: rgba(186, 180, 180, 0.618);
+  border: rgba(186, 180, 180, 0.618) solid 1px;
+}
+
+.paging {
+  margin-bottom: 3rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.page-btn {
+  margin-left: 0.3rem;
+}
+
+.active-page-btn {
+  background-color: rgba(167, 167, 167, 0.656);
 }

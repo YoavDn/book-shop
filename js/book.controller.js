@@ -2,21 +2,19 @@
 
 function onInit() {
   renderFilterByQueryStringParams()
-
   renderBooks()
 }
 function renderBooks() {
-  var books = getBooks()
+  var books = getBooks(false)
 
   const elTbody = document.querySelector('tbody')
-  console.log(books)
 
   elTbody.innerHTML = books
     .map(book => {
       return `<tr>
             <td>${book.id}</td>
             <td>${book.title}</td>
-            <td>&star;${book.rating}</td>
+            <td>&bigstar;${book.rating}</td>
             <td>${book.price}</td>
             <td><button class="read-btn"onclick=onOpenModal("${book.id}")>Read</button></td>
             <td><button class="update-btn" onclick=onUpdateBook("${book.id}")>Update</button></td>
@@ -24,6 +22,7 @@ function renderBooks() {
           </tr>`
     })
     .join('')
+  renderPagesNav()
 }
 
 function onAddBook() {
@@ -103,7 +102,7 @@ function onSortBooks() {
 
 function onFilterBooks(filterBy) {
   filterBy = setFilterBooks(filterBy)
-  console.log(filterBy)
+
   renderBooks()
 
   const queryStringParams = `?maxPrice=${filterBy.maxPrice}&minRating=${filterBy.minRating}`
@@ -131,4 +130,39 @@ function renderFilterByQueryStringParams() {
   document.querySelector('[name=min-rating]').value = filterBy.minRating
   document.querySelector('[name=max-price]').value = filterBy.maxPrice
   setFilterBooks(filterBy)
+}
+
+function onNextPage() {
+  selectPage(1)
+  renderBooks()
+}
+
+function onPrevPage() {
+  selectPage(-1)
+  renderBooks()
+}
+
+function renderPagesNav() {
+  let booksLength = getBooks(true).length
+  let pagesNum = 0
+
+  const elPagesUi = document.querySelector('.query-pages')
+  elPagesUi.innerHTML = ''
+
+  while (booksLength % PAGE_SIZE > 0) {
+    booksLength -= 5
+    pagesNum++
+  }
+
+  for (var i = 0; i < pagesNum; i++) {
+    elPagesUi.innerHTML += `<button class="page-btn" onclick="onSelectPage(${i})">${
+      i + 1
+    }</button>`
+  }
+}
+
+function onSelectPage(pageIdx) {
+  console.log('wnat to go here to page', pageIdx)
+  selectPage(pageIdx)
+  renderBooks()
 }
