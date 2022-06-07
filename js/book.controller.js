@@ -3,8 +3,6 @@
 function onInit() {
   renderFilterByQueryStringParams()
   renderBooks()
-
-  doTrans()
 }
 function renderBooks() {
   var books = getBooks(false)
@@ -25,6 +23,7 @@ function renderBooks() {
     })
     .join('')
   renderPagesNav()
+  doTrans()
 }
 
 function onAddBook() {
@@ -42,7 +41,6 @@ function onDeleteBook(bookId) {
 
 function onUpdateBook(bookId) {
   var bookPrice = prompt('Enter book Price:')
-
   updateBooks(bookId, bookPrice)
   renderBooks()
 }
@@ -207,9 +205,9 @@ elDocument.addEventListener('click', e => {
 
 function onChangeLang(lang) {
   var shortLang = lang === 'english' ? 'en' : 'he'
+  var elBody = document.querySelector('body')
   setLang(shortLang)
-  if (lang === 'he') document.body.classList.add('rtl')
-  else document.body.classList.remove('rtl')
+  if (shortLang === 'he') elBody.classList.add('rtl')
+  else elBody.classList.remove('rtl')
   renderBooks()
-  doTrans()
 }

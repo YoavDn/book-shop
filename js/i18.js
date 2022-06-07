@@ -9,6 +9,10 @@ var gTrans = {
     en: 'Name',
     he: 'שם',
   },
+  'label-sort': {
+    en: 'Sort By:',
+    he: 'מיין לפי:',
+  },
   'option-price': {
     en: 'Price',
     he: 'מחיר',
@@ -23,7 +27,7 @@ var gTrans = {
   },
   'filter-label': {
     en: 'Filter by:',
-    he: ':סנן לפי:',
+    he: 'סנן לפי:',
   },
   'filter-max-price': {
     en: 'Max Price:',
@@ -69,6 +73,22 @@ var gTrans = {
     en: 'No books Found..',
     he: '..לא נמצאו ספרים',
   },
+  'name-input': {
+    en: 'Name:',
+    he: 'שם:',
+  },
+  //   'modal-rating': {
+  //     en: 'Rating:',
+  //     he: 'דירוג:',
+  //   },
+  //   'modal-price': {
+  //     en: 'Price:',
+  //     he: 'מחיר:',
+  //   },
+  //   'modal-id': {
+  //     en: 'ID:',
+  //     he: 'שם מזהה:',
+  //   },
 }
 
 var gCurrLang = 'en'
@@ -87,11 +107,8 @@ function doTrans() {
   console.log(els)
   els.forEach(el => {
     var transKey = el.dataset.trans
-
     console.log(el)
-
     var txt = getTrans(transKey)
-
     el.innerText = txt
   })
 }
@@ -108,4 +125,9 @@ function formatCurrency(num) {
 
 function setLang(lang) {
   gCurrLang = lang
+}
+
+function isModal(el) {
+  var [isModal] = el.dataset.trans.split('-')
+  if (isModal === 'modal') return true
 }

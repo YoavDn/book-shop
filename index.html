@@ -9,6 +9,7 @@
   </head>
   <body onload="onInit()">
 
+    <h2 data-trans="title" class="title">Book Shop</h2>
     <div class="trans">
       <label for="trans-select">Choose language: </label>
       <select name="trans-select" onchange="onChangeLang(this.value)">
@@ -16,29 +17,19 @@
         <option value="hebrew">עברית</option>
       </select>
     </div>
+     <div class="add-book">
+    <button data-trans="add-book-btn" class="new-book" onclick="onAddBook()">Add new Book</button>
+    </div>
     
     
     <div class="forms">
-   <form class="select-sort" action="">
-        <label for="sort-books">Sort by:</label>
-        <select name="sort-books" onchange="onSortBooks()">
-          <option data-trans="option-price" value="price">Price</option>
-          <option data-trans="option-name" value="name">Name</option>
-          <option data-trans="option-rating" value="rating">Rating</option>
-
-        </select>
-
-      </form>
-      <div class="add-book">
-
-    <h2 data-trans="title">Book Shop</h2>
-    <button data-trans="add-book-btn" class="new-book" onclick="onAddBook()">Add new Book</button>
-    </div>
     <div class="filter-container">
-
-      <label data-trans="filter-label" for="filter-form">Filter by:</label>
+      <label data-trans="filter-label" class="filter-title" for="filter-form">Filter by:</label>
     <form  name="filter-form" class="filter-form">
+      <div class="range-container">
+        <label data-trans="name-input" for="search">Name:</label>
         <input name="search" type="text" oninput="onFilterBooks({ title: this.value})" placeholder="Enter Book name..">
+      </div>
         <div class="range-container">
           <label data-trans="filter-max-price" for="max-price">Max Price:</label>
         <input  name="max-price" min="0" max="20" step="0.1" type="range" onchange="onFilterBooks({maxPrice: this.value});updatePriceValue(this.value)">
@@ -49,12 +40,21 @@
         <input name="min-rating" min="0" max="10"  type="range" onchange="onFilterBooks({minRating: this.value});updateRatingValue(this.value)">
         <p id="rating-value">0</p> 
        </div>
-
       </form>
     </div>
     
     
     </div>
+    <form class="select-sort" action="">
+        <label data-trans="label-sort" for="sort-books">Sort by:</label>
+        <select name="sort-books" onchange="onSortBooks()">
+          <option data-trans="option-price" value="price">Price</option>
+          <option data-trans="option-name" value="name">Name</option>
+          <option data-trans="option-rating" value="rating">Rating</option>
+
+        </select>
+
+      </form>
  
 
 
@@ -81,7 +81,7 @@
     </section>
     <div class="modal hidden">
       <button class="close-modal" onclick="onCloseModal()">&Cross;</button>
-      <h2 class="book-title">Harry potter</h2>
+      <h2  class="book-title">Harry potter</h2>
       <div class="book-info">
 
         <h3>Rating: <span class="book-rating">2</span></h3>
