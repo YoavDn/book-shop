@@ -77,18 +77,18 @@ var gTrans = {
     en: 'Name:',
     he: 'שם:',
   },
-  //   'modal-rating': {
-  //     en: 'Rating:',
-  //     he: 'דירוג:',
-  //   },
-  //   'modal-price': {
-  //     en: 'Price:',
-  //     he: 'מחיר:',
-  //   },
-  //   'modal-id': {
-  //     en: 'ID:',
-  //     he: 'שם מזהה:',
-  //   },
+  'modal-rating': {
+    en: 'Rating: ',
+    he: ' דירוג:',
+  },
+  'modal-price': {
+    en: 'Price: ',
+    he: ' מחיר:',
+  },
+  'modal-id': {
+    en: 'ID: ',
+    he: ' שם מזהה:',
+  },
 }
 
 var gCurrLang = 'en'
@@ -104,19 +104,22 @@ function getTrans(transKey) {
 
 function doTrans() {
   const els = document.querySelectorAll('[data-trans]')
-  console.log(els)
+
   els.forEach(el => {
     var transKey = el.dataset.trans
-    console.log(el)
     var txt = getTrans(transKey)
     el.innerText = txt
   })
 }
 
-function formatCurrency(num) {
-  return new Intl.NumberFormat('he-IL', {
+function formatCurrency(num, country) {
+  var country = gCurrLang === 'en' ? 'en-US' : 'he-IL'
+  var currency = gCurrLang === 'en' ? 'USD' : 'ILS'
+
+  if (gCurrLang === 'he') num *= 3.5
+  return new Intl.NumberFormat(country, {
     style: 'currency',
-    currency: 'ILS',
+    currency: currency,
   }).format(num)
 }
 
@@ -130,4 +133,8 @@ function setLang(lang) {
 function isModal(el) {
   var [isModal] = el.dataset.trans.split('-')
   if (isModal === 'modal') return true
+}
+
+function formatNum(num) {
+  return new Intl.NumberFormat(gCurrLang).format(num)
 }

@@ -2,6 +2,7 @@
 
 function onInit() {
   renderFilterByQueryStringParams()
+  renderQueryStringModalParam()
   renderBooks()
 }
 function renderBooks() {
@@ -14,11 +15,17 @@ function renderBooks() {
       return `<tr>
             <td>${book.id}</td>
             <td>${book.title}</td>
-            <td>&bigstar;${book.rating}</td>
-            <td>$${book.price}</td>
-            <td><button data-trans="btn-read" class="read-btn"onclick=onOpenModal("${book.id}")>Read</button></td>
-            <td><button data-trans="btn-update" class="update-btn" onclick=onUpdateBook("${book.id}")>Update</button></td>
-            <td><button data-trans="btn-delete"class="delete-btn" onclick=onDeleteBook("${book.id}")>Delete</button></td>
+            <td>&bigstar; ${book.rating}</td>
+            <td>${formatCurrency(book.price, gCurrLang)}</td>
+            <td><button data-trans="btn-read" class="read-btn"onclick=onOpenModal("${
+              book.id
+            }")>Read</button></td>
+            <td><button data-trans="btn-update" class="update-btn" onclick=onUpdateBook("${
+              book.id
+            }")>Update</button></td>
+            <td><button data-trans="btn-delete"class="delete-btn" onclick=onDeleteBook("${
+              book.id
+            }")>Delete</button></td>
           </tr>`
     })
     .join('')
@@ -47,7 +54,7 @@ function onUpdateBook(bookId) {
 
 function onOpenModal(bookId) {
   const book = getBook(bookId)
-  console.log(book)
+
   updateModalInfo(book)
 
   const elModal = document.querySelector('.modal')
@@ -55,6 +62,7 @@ function onOpenModal(bookId) {
 
   elModal.classList.remove('hidden')
   elOverlay.classList.remove('hidden')
+  saveQueryString(book.id)
 }
 
 function updateModalInfo(book, isNewDesc = true) {
@@ -80,6 +88,8 @@ function onCloseModal() {
   const elOverlay = document.querySelector('.overlay')
   elModal.classList.add('hidden')
   elOverlay.classList.add('hidden')
+  saveQueryString()
+
   renderBooks()
 }
 
@@ -104,8 +114,6 @@ function onSortBooks() {
 
 function onFilterBooks(filterBy) {
   filterBy = setFilterBooks(filterBy)
-  const currPage = getCurPage()
-  console.log(currPage)
   renderBooks()
 
   const queryStringParams = `?maxPrice=${filterBy.maxPrice}&minRating=${filterBy.minRating}&title=${filterBy.title}`
@@ -152,12 +160,10 @@ function renderPagesNav() {
   let booksLength = getBooks(true).length
   let pagesNum = 0
   const currPage = getCurPage()
-
   if (!booksLength) {
     renderMsg()
     doTrans()
   }
-
   const elPagesUi = document.querySelector('.query-pages')
   elPagesUi.innerHTML = ''
 
@@ -176,9 +182,7 @@ function renderPagesNav() {
 }
 
 function onSelectPage(pageIdx) {
-  console.log('wnat to go here to page', pageIdx)
   selectPage(pageIdx)
-
   renderBooks()
 }
 
@@ -188,20 +192,12 @@ function renderMsg() {
 }
 
 function updateRatingValue(val) {
-  console.log(val)
   document.getElementById('rating-value').innerText = val
 }
 
 function updatePriceValue(val) {
-  console.log(val)
   document.getElementById('price-value').innerText = val
 }
-
-const elDocument = document.querySelector('body')
-
-elDocument.addEventListener('click', e => {
-  if (e.target.classList.contains('overlay')) onCloseModal()
-})
 
 function onChangeLang(lang) {
   var shortLang = lang === 'english' ? 'en' : 'he'
@@ -211,3 +207,29 @@ function onChangeLang(lang) {
   else elBody.classList.remove('rtl')
   renderBooks()
 }
+
+function saveQueryString(bookId = '') {
+  const filter = getFilterBy()
+
+  const queryStringParams = `?name=${filter.name}&maxPrice=${filter.maxPrice}&readingId=${bookId}`
+  const newUrl =
+    window.location.protocol +
+    '//' +
+    window.location.host +
+    window.location.pathname +
+    queryStringParams
+  window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function renderQueryStringModalParam() {
+  const queryStringParams = new URLSearchParams(window.location.search)
+  const readingId = queryStringParams.get('readingId') || ''
+  if (readingId) onOpenModal(readingId)
+}
+
+//handle click outside of overlay
+const elDocument = document.querySelector('body')
+
+elDocument.addEventListener('click', e => {
+  if (e.target.classList.contains('overlay')) onCloseModal()
+})

@@ -24,9 +24,6 @@ function getCurPage() {
 
 function selectPage(pageIdx) {
   const booksOnPage = getBooksOnPage(pageIdx)
-  console.log(pageIdx)
-  console.log(booksOnPage)
-
   if (booksOnPage > 0) gPageIdx = pageIdx
 }
 
@@ -50,6 +47,10 @@ function _createBooks() {
   _saveBooksToStorage()
 }
 
+function getFilterBy() {
+  return gFilterBy
+}
+
 function getBooks(isAll) {
   var books = gBooks.filter(book => {
     return (
@@ -62,17 +63,11 @@ function getBooks(isAll) {
     const startIdx = gPageIdx * PAGE_SIZE
     books = books.slice(startIdx, startIdx + PAGE_SIZE)
   }
-
   return books
-}
-
-function _saveBooksToStorage() {
-  saveToStorage(STORAGE_KEY, gBooks)
 }
 
 function addBook(title, price) {
   var book = _createBook(title)
-
   book.price = price
   gBooks.unshift(book)
   _saveBooksToStorage()
@@ -80,22 +75,28 @@ function addBook(title, price) {
 
 function removeBook(bookId) {
   var bookIdx = gBooks.findIndex(book => book.id === bookId)
-  console.log(bookIdx)
+
   gBooks.splice(bookIdx, 1)
   _saveBooksToStorage()
 }
 
 function updateBooks(bookId, bookPrice) {
-  console.log(bookId)
-  var bookIdx = gBooks.findIndex(book => '' + book.id === bookId)
-  console.log(gBooks)
-
-  gBooks[bookIdx].price = bookPrice
+  var book = getBook(bookId)
+  book.price = bookPrice
   _saveBooksToStorage()
 }
 
 function getBook(bookId) {
   return gBooks.find(book => '' + book.id === bookId)
+}
+
+function setFilterBooks(filterBy = {}) {
+  if (filterBy.maxPrice !== undefined) gFilterBy.maxPrice = filterBy.maxPrice
+  if (filterBy.minRating !== undefined) gFilterBy.minRating = filterBy.minRating
+  if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
+  // var books = gBooks.filter(book => book.title === value)
+
+  return gFilterBy
 }
 
 function updateBookRating(value, book) {
@@ -108,7 +109,6 @@ function updateBookRating(value, book) {
 }
 
 function setBookSort(value) {
-  console.log(value)
   if (value === 'name') {
     gBooks.sort((b1, b2) => b1.title.localeCompare(b2.title))
   }
@@ -117,13 +117,8 @@ function setBookSort(value) {
   _saveBooksToStorage()
 }
 
-function setFilterBooks(filterBy = {}) {
-  if (filterBy.maxPrice !== undefined) gFilterBy.maxPrice = filterBy.maxPrice
-  if (filterBy.minRating !== undefined) gFilterBy.minRating = filterBy.minRating
-  if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
-  // var books = gBooks.filter(book => book.title === value)
-
-  return gFilterBy
+function _saveBooksToStorage() {
+  saveToStorage(STORAGE_KEY, gBooks)
 }
 
 function getBooksOnPage(pageIdx) {
