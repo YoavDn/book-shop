@@ -1,0 +1,95 @@
+'use strict'
+
+var gTrans = {
+  title: {
+    en: 'Book Shop',
+    he: 'חנות ספרים',
+  },
+  'option-name': {
+    en: 'Name',
+    he: 'שם',
+  },
+  'option-price': {
+    en: 'Price',
+    he: 'מחיר',
+  },
+  'option-rating': {
+    en: 'Rating',
+    he: 'דירוג',
+  },
+  'add-book-btn': {
+    en: 'Add new book',
+    he: 'הוסף ספר',
+  },
+  'filter-label': {
+    en: 'Filter by:',
+    he: ':סנן לפי:',
+  },
+  'filter-max-price': {
+    en: 'Max Price:',
+    he: 'מחיר:',
+  },
+  'filter-min-rating': {
+    en: 'Min Rating:',
+    he: 'דירוג',
+  },
+  'book-id': {
+    en: 'ID',
+    he: 'שם מזהה',
+  },
+  'book-title': {
+    en: 'Title',
+    he: 'שם',
+  },
+  'book-rating': {
+    en: 'Rating',
+    he: 'דירוג',
+  },
+  'book-price': {
+    en: 'Price',
+    he: 'מחיר',
+  },
+  'book-actions': {
+    en: 'Actions',
+    he: 'פעולות',
+  },
+}
+
+var gCurrLang = 'en'
+
+function getTrans(transKey) {
+  var keyTrans = gTrans[transKey]
+  if (!keyTrans) return 'UNKNOWN'
+  var txt = keyTrans[gCurrLang]
+
+  if (!txt) txt = keyTrans.en
+  return txt
+}
+
+function doTrans() {
+  const els = document.querySelectorAll('[data-trans]')
+  console.log(els)
+  els.forEach(el => {
+    var transKey = el.dataset.trans
+    console.log(transKey)
+    console.log(el)
+
+    var txt = getTrans(transKey)
+
+    el.innerText = txt
+  })
+}
+
+function formatCurrency(num) {
+  return new Intl.NumberFormat('he-IL', {
+    style: 'currency',
+    currency: 'ILS',
+  }).format(num)
+}
+
+// var title = document.querySelectorAll('[data-trans]')
+// console.log(title[5].firstChild.data)
+
+function setLang(lang) {
+  gCurrLang = lang
+}

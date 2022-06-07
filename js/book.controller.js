@@ -2,6 +2,8 @@
 
 function onInit() {
   renderFilterByQueryStringParams()
+
+  doTrans()
   renderBooks()
 }
 function renderBooks() {
@@ -63,7 +65,9 @@ function updateModalInfo(book, isNewDesc = true) {
   const elModalId = document.querySelector('.book-id')
   const elModalRating = document.querySelector('.book-rating')
   const elModalDesc = document.querySelector('.book-desc')
+  const elUpdateRate = document.querySelector('.update-rate')
 
+  elUpdateRate.innerText = book.rating
   elModalId.innerText = book.id
   elModalPrice.innerText = book.price
   elModalTitle.innerText = book.title
@@ -200,3 +204,10 @@ const elDocument = document.querySelector('body')
 elDocument.addEventListener('click', e => {
   if (e.target.classList.contains('overlay')) onCloseModal()
 })
+
+function onChangeLang(lang) {
+  var shortLang = lang === 'english' ? 'en' : 'he'
+  setLang(shortLang)
+  doTrans()
+  renderBooks()
+}

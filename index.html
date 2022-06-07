@@ -8,36 +8,44 @@
     <title>Book Shop</title>
   </head>
   <body onload="onInit()">
+
+    <div class="trans">
+      <label for="trans-select">Choose language: </label>
+      <select name="trans-select" onchange="onChangeLang(this.value)">
+        <option value="english">English</option>
+        <option value="hebrew">עברית</option>
+      </select>
+    </div>
     
     
     <div class="forms">
    <form class="select-sort" action="">
         <label for="sort-books">Sort by:</label>
         <select name="sort-books" onchange="onSortBooks()">
-          <option value="price">Price</option>
-          <option value="name">Name</option>
-          <option value="rating">Rating</option>
+          <option data-trans="option-price" value="price">Price</option>
+          <option data-trans="option-name" value="name">Name</option>
+          <option data-trans="option-rating" value="rating">Rating</option>
 
         </select>
 
       </form>
       <div class="add-book">
 
-    <h2>Book Shop</h2>
-    <button class="new-book" onclick="onAddBook()">Add new Book</button>
+    <h2 data-trans="title">Book Shop</h2>
+    <button data-trans="add-book-btn" class="new-book" onclick="onAddBook()">Add new Book</button>
     </div>
     <div class="filter-container">
 
-      <label for="filter-form">Filter by:</label>
+      <label data-trans="filter-label" for="filter-form">Filter by:</label>
     <form  name="filter-form" class="filter-form">
         <input name="search" type="text" oninput="onFilterBooks({ title: this.value})" placeholder="Enter Book name..">
         <div class="range-container">
-          <label for="max-price">Max Price:</label>
-        <input name="max-price" min="0" max="20" step="0.1" type="range" onchange="onFilterBooks({maxPrice: this.value});updatePriceValue(this.value)">
+          <label data-trans="filter-max-price" for="max-price">Max Price:</label>
+        <input  name="max-price" min="0" max="20" step="0.1" type="range" onchange="onFilterBooks({maxPrice: this.value});updatePriceValue(this.value)">
           <p id="price-value">0</p>
         </div>
        <div class="range-container">
-          <label for="min-rating">Min Rating:</label>
+          <label data-trans="filter-min-rating" for="min-rating">Min Rating:</label>
         <input name="min-rating" min="0" max="10"  type="range" onchange="onFilterBooks({minRating: this.value});updateRatingValue(this.value)">
         <p id="rating-value">0</p> 
        </div>
@@ -54,10 +62,10 @@
       <table>
         <thead>
           <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Rating</td>
-            <td >Price</td>
+            <td data-trans="book-id" >ID</td>
+            <td data-trans="book-title">Title</td>
+            <td data-trans="book-rating">Rating</td>
+            <td data-trans="book-price" >Price</td>
 
             <td colspan="3">Actions</td>
           </tr>
@@ -99,6 +107,7 @@
     <div class="user-msg"></div>
     <div class="overlay hidden"></div>
     <script src="js/services/util.service.js"></script>
+    <script src="js/i18.js"></script>
     <script src="js/services/storage.service.js"></script>
     <script src="js/services/book.service.js"></script>
     <script src="js/book.controller.js"></script>
