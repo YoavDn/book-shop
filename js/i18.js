@@ -53,6 +53,22 @@ var gTrans = {
     en: 'Actions',
     he: 'פעולות',
   },
+  'btn-update': {
+    en: 'Update',
+    he: 'עדכן',
+  },
+  'btn-delete': {
+    en: 'Delete',
+    he: 'מחק',
+  },
+  'btn-read': {
+    en: 'Read',
+    he: 'קרא',
+  },
+  'no-books-found': {
+    en: 'No books Found..',
+    he: '..לא נמצאו ספרים',
+  },
 }
 
 var gCurrLang = 'en'
@@ -71,7 +87,7 @@ function doTrans() {
   console.log(els)
   els.forEach(el => {
     var transKey = el.dataset.trans
-    console.log(transKey)
+
     console.log(el)
 
     var txt = getTrans(transKey)

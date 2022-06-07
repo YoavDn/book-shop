@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+body.rtl {
+  direction: rtl;
+}
+
 html {
   font-family: 'Lato', sans-serif;
   color: rgb(205, 196, 196);

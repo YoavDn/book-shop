@@ -2,9 +2,9 @@
 
 function onInit() {
   renderFilterByQueryStringParams()
+  renderBooks()
 
   doTrans()
-  renderBooks()
 }
 function renderBooks() {
   var books = getBooks(false)
@@ -18,9 +18,9 @@ function renderBooks() {
             <td>${book.title}</td>
             <td>&bigstar;${book.rating}</td>
             <td>$${book.price}</td>
-            <td><button class="read-btn"onclick=onOpenModal("${book.id}")>Read</button></td>
-            <td><button class="update-btn" onclick=onUpdateBook("${book.id}")>Update</button></td>
-            <td><button class="delete-btn" onclick=onDeleteBook("${book.id}")>Delete</button></td>
+            <td><button data-trans="btn-read" class="read-btn"onclick=onOpenModal("${book.id}")>Read</button></td>
+            <td><button data-trans="btn-update" class="update-btn" onclick=onUpdateBook("${book.id}")>Update</button></td>
+            <td><button data-trans="btn-delete"class="delete-btn" onclick=onDeleteBook("${book.id}")>Delete</button></td>
           </tr>`
     })
     .join('')
@@ -157,6 +157,7 @@ function renderPagesNav() {
 
   if (!booksLength) {
     renderMsg()
+    doTrans()
   }
 
   const elPagesUi = document.querySelector('.query-pages')
@@ -185,8 +186,7 @@ function onSelectPage(pageIdx) {
 
 function renderMsg() {
   const elTbody = document.querySelector('tbody')
-
-  elTbody.innerHTML = `<tr> <td class="eror-msg" colspan="5">No books found...</td> </tr>`
+  elTbody.innerHTML = `<tr> <td data-trans="no-books-found" class="eror-msg" colspan="5">No books found...</td> </tr>`
 }
 
 function updateRatingValue(val) {
@@ -208,6 +208,8 @@ elDocument.addEventListener('click', e => {
 function onChangeLang(lang) {
   var shortLang = lang === 'english' ? 'en' : 'he'
   setLang(shortLang)
-  doTrans()
+  if (lang === 'he') document.body.classList.add('rtl')
+  else document.body.classList.remove('rtl')
   renderBooks()
+  doTrans()
 }

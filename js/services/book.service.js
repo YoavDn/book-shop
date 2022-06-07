@@ -80,6 +80,7 @@ function addBook(title, price) {
 
 function removeBook(bookId) {
   var bookIdx = gBooks.findIndex(book => book.id === bookId)
+  console.log(bookIdx)
   gBooks.splice(bookIdx, 1)
   _saveBooksToStorage()
 }
